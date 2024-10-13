@@ -1,6 +1,6 @@
-# LLM News Research Tool
+# Christianity News Research Tool
 
-This Python script is a versatile tool for conducting web research on Large Language Model (LLM) news, generating articles, and translating content into multiple languages.
+This Python script is a versatile tool for conducting web research on Christian news, generating articles, and translating content into multiple languages.
 
 ## Key Features
 
@@ -26,4 +26,4 @@ This Python script is a versatile tool for conducting web research on Large Lang
 3. Run the script: `python research.py`
 4. Follow the prompts to input your search query, choose languages, and set up scheduling if desired.
 
-This tool streamlines the process of researching and creating content about the latest developments in LLM technology, making it valuable for journalists, researchers, and enthusiasts in the field.
+This tool streamlines the process of researching and creating content about the latest developments in Christianity, making it valuable for journalists, researchers, and enthusiasts in the field.

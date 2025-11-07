@@ -2,6 +2,10 @@
 from exa_py import Exa  # For web search functionality
 from openai import OpenAI  # For AI-powered text generation
 import os  # For interacting with the operating system
+from dotenv import load_dotenv  # For loading environment variables from .env file
+
+# Load environment variables from .env file (for local development)
+load_dotenv()
 import json  # For JSON data handling
 from enum import Enum  # For creating enumerated types
 import threading  # For parallel processing

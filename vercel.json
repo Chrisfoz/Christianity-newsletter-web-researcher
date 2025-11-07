@@ -32,7 +32,7 @@
       ]
     },
     {
-      "source": "/(.*\\.html)",
+      "source": "/:path*.html",
       "headers": [
         {
           "key": "Cache-Control",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(png|jpg|jpeg|gif|svg|webp))",
+      "source": "/:path*.(png|jpg|jpeg|gif|svg|webp)",
       "headers": [
         {
           "key": "Cache-Control",

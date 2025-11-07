@@ -130,7 +130,7 @@ def prepare_html_template(language, logo_path, author_name):
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
         <style>
             body {{
                 background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -139,9 +139,10 @@ def prepare_html_template(language, logo_path, author_name):
                 line-height: 1.8;
             }}
             .content {{
-                font-family: 'Merriweather', serif;
-                font-size: 1.125rem;
-                line-height: 1.9;
+                font-family: 'Lora', serif;
+                font-size: 1.1875rem;
+                line-height: 2;
+                color: #e2e8f0;
             }}
             .content h1 {{
                 font-family: 'Inter', sans-serif;
@@ -174,7 +175,7 @@ def prepare_html_template(language, logo_path, author_name):
             }}
             .content p {{
                 margin-bottom: 1.5rem;
-                color: #cbd5e1;
+                color: #e2e8f0;
             }}
             .content a {{
                 color: #60a5fa;
@@ -202,7 +203,7 @@ def prepare_html_template(language, logo_path, author_name):
             }}
             .content li {{
                 margin-bottom: 0.75rem;
-                color: #cbd5e1;
+                color: #e2e8f0;
             }}
             .content strong {{
                 font-weight: 700;
@@ -231,15 +232,6 @@ def prepare_html_template(language, logo_path, author_name):
                 .content h3 {{ font-size: 1.25rem; }}
                 .newsletter-card {{ padding: 1.5rem; }}
             }}
-            .social-links a {{
-                display: inline-block;
-                margin: 0 0.5rem;
-                color: #94a3b8;
-                transition: color 0.2s ease;
-            }}
-            .social-links a:hover {{
-                color: #60a5fa;
-            }}
         </style>
     </head>
     <body>
@@ -262,11 +254,9 @@ def prepare_html_template(language, logo_path, author_name):
                     <h1 class="text-4xl sm:text-5xl font-bold mb-3 text-white leading-tight">AI for the Soul</h1>
                     <p class="text-xl sm:text-2xl text-blue-300 mb-4 font-light">Christianity News & Faith in Technology</p>
                     <div class="border-t border-slate-600 pt-4 mt-4">
+                        <p class="text-2xl font-bold mb-3 text-blue-400">📅 {current_date}</p>
                         <p class="text-lg font-semibold mb-1 text-gray-200">By {author_name}</p>
-                        <p class="text-sm text-gray-400">
-                            <span class="inline-block mr-4">📅 {current_date}</span>
-                            <span class="inline-block">🤖 AI-Generated Newsletter</span>
-                        </p>
+                        <p class="text-sm text-gray-400">🤖 AI-Generated Newsletter</p>
                     </div>
                 </div>
             </div>

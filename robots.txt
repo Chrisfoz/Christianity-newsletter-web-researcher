@@ -1,0 +1,9 @@
+# Robots.txt for AI for the Soul Newsletter
+
+User-agent: *
+Allow: /
+Disallow: /newsletter/search_results.json
+Disallow: /*/search_results.json
+
+# Sitemap
+Sitemap: https://html-starter-ko9cvrztp-christopher-foster-mcbrides-projects.vercel.app/sitemap.xml

@@ -1,0 +1,64 @@
+name: Generate Christianity Newsletter
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC (adjust as needed)
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  generate-newsletter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate newsletter
+        env:
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python researcher_auto.py
+
+      - name: Copy latest newsletter to root for Vercel
+        run: |
+          if [ -f newsletter/chrisitian_news_article_en.html ]; then
+            cp newsletter/chrisitian_news_article_en.html index.html
+          fi
+
+      - name: Build newsletter archive
+        run: |
+          python build_archive.py
+
+      - name: Build sitemap
+        run: |
+          python build_sitemap.py
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Commit and push changes
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-generate newsletter - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push -u origin ${{ github.ref_name }}
+          fi

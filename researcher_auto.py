@@ -11,6 +11,7 @@ import time  # For time-related operations
 from datetime import datetime  # For working with dates and times
 import base64  # For encoding the logo image
 import re  # For regular expressions
+import sys  # For command line arguments
 
 # Define an enumeration for supported languages
 class Language(Enum):
@@ -114,6 +115,9 @@ def prepare_html_template(language, logo_path, author_name):
         encoded_logo = "Logo not found"
 
     current_date = datetime.now().strftime("%B %d, %Y")
+    page_title = f"AI for the Soul: Christianity News - {current_date}"
+    page_description = "Exploring the latest Christianity news and the intersection of faith and technology. AI-generated newsletter covering Christian churches, faith-based innovation, and spiritual insights."
+    page_url = "https://html-starter-ko9cvrztp-christopher-foster-mcbrides-projects.vercel.app/"
 
     return f"""
     <!DOCTYPE html>
@@ -121,8 +125,29 @@ def prepare_html_template(language, logo_path, author_name):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AI for the Soul: Christianity News & Faith in Technology</title>
-        <meta name="description" content="Exploring the latest Christianity news and the intersection of faith and technology">
+        <title>{page_title}</title>
+        <meta name="description" content="{page_description}">
+        <meta name="author" content="{author_name}">
+        <meta name="keywords" content="Christianity, Christian news, faith and technology, AI, religion, churches, Christian innovation">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="{page_url}">
+        <meta property="og:title" content="{page_title}">
+        <meta property="og:description" content="{page_description}">
+        <meta property="og:image" content="{page_url}AIforthesoul.png">
+        <meta property="og:site_name" content="AI for the Soul">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="{page_url}">
+        <meta name="twitter:title" content="{page_title}">
+        <meta name="twitter:description" content="{page_description}">
+        <meta name="twitter:image" content="{page_url}AIforthesoul.png">
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="{page_url}">
+
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -278,7 +303,35 @@ def prepare_html_template(language, logo_path, author_name):
                     <a href="https://www.aiforthesoul.org/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200">
                         Visit aiforthesoul.org
                     </a>
+
                     <div class="mt-6 pt-6 border-t border-slate-600">
+                        <p class="text-sm text-gray-300 mb-3">Share this newsletter:</p>
+                        <div class="flex justify-center gap-3 mb-6">
+                            <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20Christianity%20newsletter%20from%20AI%20for%20the%20Soul&url={page_url}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center px-4 py-2 bg-slate-700 hover:bg-blue-500 text-white rounded-lg transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                                Twitter
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={page_url}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center px-4 py-2 bg-slate-700 hover:bg-blue-600 text-white rounded-lg transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                Facebook
+                            </a>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={page_url}&title=AI%20for%20the%20Soul%20Newsletter"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center px-4 py-2 bg-slate-700 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-600">
                         <p class="text-sm text-gray-400">
                             Questions or feedback? Email us at
                             <a href="mailto:support@aiforthesoul.org" class="text-blue-400 hover:text-blue-300">support@aiforthesoul.org</a>
@@ -341,46 +394,27 @@ def save_html_page(html_content, folder, filename):
         f.write(html_content)
     print(colored(f"HTML page saved to {filepath}", "magenta"))
 
-# Get user input for target languages
-def get_target_languages():
-    print(colored("Available languages:", "cyan"))
-    for i, lang in enumerate(Language, 1):
-        print(colored(f"{i}. {lang.value}", "cyan"))
-    
-    selected_langs = []
-    while True:
-        choice = input(colored("Enter the number of the language you want to translate to (or 'done' to finish): ", "cyan"))
-        if choice.lower() == 'done':
-            break
-        try:
-            lang_index = int(choice) - 1
-            if 0 <= lang_index < len(Language):
-                selected_langs.append(Language(list(Language)[lang_index].value))
-            else:
-                print(colored("Invalid choice. Please try again.", "red"))
-        except ValueError:
-            print(colored("Invalid input. Please enter a number or 'done'.", "red"))
-    
-    return selected_langs
-
 # Process a single language (translate, generate HTML, and save files)
 def process_language(openai_client, content, lang, folder, logo_path, author_name):
     translated_article = translate_article(openai_client, content, lang.value)
     md_filepath = save_translated_article(translated_article, lang.value, folder, f"chrisitian_news_article_{lang.value.lower()[:2]}.md")
-    
+
     # Read the markdown file
     with open(md_filepath, 'r', encoding='utf-8') as f:
         markdown_content = f.read()
-    
+
     # Generate HTML from markdown
     html_content = generate_html(markdown_content, lang.value, logo_path, author_name)
     save_html_page(html_content, folder, f"chrisitian_news_article_{lang.value.lower()[:2]}.html")
 
 # Main task execution function
-def run_task(exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name):
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    folder = f"chrisitian_news_{timestamp}"
-    
+def run_task(exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name, output_folder=None):
+    if output_folder:
+        folder = output_folder
+    else:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        folder = f"chrisitian_news_{timestamp}"
+
     # Perform web search and prepare content
     search_result = perform_web_research(exa_client, query, num_results)
     serialized_results = serialize_search_results(search_result)
@@ -406,52 +440,26 @@ def run_task(exa_client, openai_api_key, query, num_results, target_languages, l
         thread.join()
 
     print(colored(f"Newsletter generation completed. Files saved in folder: {folder}", "green"))
+    return folder
 
-# Function to handle scheduling and execution
-def schedule_and_run(schedule_choice, interval, exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name):
-    # Run the task immediately
-    run_task(exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
-    
-    if schedule_choice == 'custom':
-        schedule.every(interval).hours.do(run_task, exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
-        print(colored(f"Task scheduled to run every {interval} hours. Press Ctrl+C to stop.", "green"))
-    elif schedule_choice == 'weekly':
-        schedule.every(7).days.do(run_task, exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
-        print(colored("Task scheduled to run weekly. Press Ctrl+C to stop.", "green"))
-    
-    # Enter the scheduling loop for future runs
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
-# Main function to handle user input and program flow
+# Main function for automated execution
 def main():
     exa_client = initialize_exa()
     openai_api_key = os.getenv('OPENAI_API_KEY')
     logo_path = "AIforthesoul.png"
     author_name = "Christopher Foster-McBride"
 
-    # Get user input for search query and number of results
-    query = input(colored("Enter your web research query: ", "cyan"))
-    num_results = int(input(colored("Enter the number of results you want: ", "cyan")))
-    
-    # Ask if user wants to translate the article
-    translate_choice = input(colored("Do you want to translate the article? (yes/no): ", "cyan")).lower()
-    target_languages = []
-    if translate_choice == 'yes':
-        target_languages = get_target_languages()
+    # Default query for automated runs
+    query = "Christianity news, Christian churches, Christianity and AI, faith and technology, Christian social impact"
+    num_results = 10
 
-    # Ask if user wants to schedule recurring execution
-    schedule_choice = input(colored("Do you want to schedule recurring execution? (one-time/custom/weekly): ", "cyan")).lower()
-    
-    if schedule_choice == 'custom':
-        interval = int(input(colored("Enter the interval for recurring execution (in hours): ", "cyan")))
-        schedule_and_run(schedule_choice, interval, exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
-    elif schedule_choice == 'weekly':
-        schedule_and_run(schedule_choice, 168, exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
-    else:
-        # Run the task once immediately
-        run_task(exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name)
+    # Output to a fixed folder for easy deployment
+    output_folder = "newsletter"
+
+    # Run with English only for automated generation
+    target_languages = [Language.ENGLISH]
+
+    run_task(exa_client, openai_api_key, query, num_results, target_languages, logo_path, author_name, output_folder)
 
 # Entry point of the script
 if __name__ == "__main__":

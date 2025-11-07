@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Generated newsletters (optional - comment out if you want to keep history)
+# chrisitian_news_*/
+# newsletter/
+
+# Keep the newsletter folder but ignore its contents initially
+newsletter/.gitkeep
+
+# Subscriber data (keep private!)
+subscribers.txt
+
+# Test files
+test_subscribers.txt

@@ -1,28 +1,12 @@
 {
-  "version": 2,
-  "name": "ai-for-the-soul-newsletter",
-  "builds": [
+  "rewrites": [
     {
-      "src": "**/*.html",
-      "use": "@vercel/static"
+      "source": "/",
+      "destination": "/index.html"
     },
     {
-      "src": "**/*.png",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/archive",
-      "dest": "/archive.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/archive",
+      "destination": "/archive.html"
     }
   ],
   "headers": [
